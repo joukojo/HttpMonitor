@@ -16,8 +16,7 @@ public class HttpMonitorAppFrame extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	
-	public HttpMonitorAppFrame() {
+	protected HttpMonitorAppFrame() {
 		super("HttpMonitorApplication");
 		setSize(500, 500);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
