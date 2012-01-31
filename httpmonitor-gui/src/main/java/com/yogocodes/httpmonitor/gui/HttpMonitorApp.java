@@ -7,7 +7,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import com.yogocodes.httpmonitor.gui.frames.HttpMonitorAppFrame;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.yogocodes.httpmonitor.gui.frames.HttpMonitorAppFrameFactory;
 
 /**
@@ -18,6 +20,8 @@ import com.yogocodes.httpmonitor.gui.frames.HttpMonitorAppFrameFactory;
  */
 public class HttpMonitorApp {
 
+	private final static Logger LOG = LoggerFactory.getLogger(HttpMonitorApp.class); 
+	
 	/**
 	 * Main method
 	 * @param args cli arguments
@@ -34,17 +38,13 @@ public class HttpMonitorApp {
 					HttpMonitorAppFrameFactory.getAppFrameInstance();
 					
 				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					LOG.error("failed to locate class:" + e.getMessage(), e); 
 				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					LOG.error("failed to instantiate class"+ e.getMessage(), e); 
 				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					LOG.error("Illegal access exception", e);
 				} catch (UnsupportedLookAndFeelException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					LOG.error("unsupported look and feel", e); 
 				}
 
 				
