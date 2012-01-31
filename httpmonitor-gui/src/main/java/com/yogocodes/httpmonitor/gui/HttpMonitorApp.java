@@ -8,6 +8,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import com.yogocodes.httpmonitor.gui.frames.HttpMonitorAppFrame;
+import com.yogocodes.httpmonitor.gui.frames.HttpMonitorAppFrameFactory;
 
 /**
  *  HttpMonitor application which is used to start the gui interface.
@@ -30,7 +31,7 @@ public class HttpMonitorApp {
 				try {
 					UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 					
-					new HttpMonitorAppFrame();
+					HttpMonitorAppFrameFactory.getAppFrameInstance();
 					
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
