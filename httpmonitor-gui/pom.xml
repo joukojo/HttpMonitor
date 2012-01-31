@@ -1,0 +1,48 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>com.yogocodes.httpmonitor</artifactId>
+		<groupId>com.yogocodes.httpmonitor</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>com.yogocodes.httpmonitor</groupId>
+	<artifactId>httpmonitor-gui</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Httpmonitor-gui</name>
+	<description>Gui interface for the HttpMonitor</description>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>UTF-8</encoding>
+					<compilerArgument>-Xlint:all</compilerArgument>
+					<showDeprecation>true</showDeprecation>
+					<showWarnings>true</showWarnings>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef></descriptorRef>
+					</descriptorRefs>
+					<archive>
+						<manifest>
+							<mainClass>com.yogocodes.httpmonitor.gui.HttpMonitorApp</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+		<finalName>httpmonitor-gui</finalName>
+
+	</build>
+
+</project>
