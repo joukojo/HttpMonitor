@@ -7,6 +7,10 @@ import javax.swing.table.AbstractTableModel;
 
 public class MonitorResultTableModel extends AbstractTableModel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final List<MonitorResult> results; 
 	private String [] header = {"url", "delay"};
 	public MonitorResultTableModel() {
