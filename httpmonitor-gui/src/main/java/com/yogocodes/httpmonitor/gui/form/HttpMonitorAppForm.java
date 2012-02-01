@@ -10,6 +10,7 @@ import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.Timer;
 
+import com.yogocodes.httpmonitor.gui.listeners.AddNewHostActionListenerImpl;
 import com.yogocodes.httpmonitor.gui.listeners.EnableDisableButtonActionListenerImpl;
 import com.yogocodes.httpmonitor.gui.listeners.ResultTableRefreshActionListenerImpl;
 import com.yogocodes.httpmonitor.gui.listeners.StartMonitoringActionListenerImpl;
@@ -38,6 +39,7 @@ public class HttpMonitorAppForm implements Serializable {
 	
 	public HttpMonitorAppForm() {
 		addHostButton = new JButton("Add");
+		addHostButton.addActionListener(new AddNewHostActionListenerImpl());
 		removeHostButton = new JButton("Remove");
 		editHostButton = new JButton("Edit");
 		monitorResultTableModel = new MonitorResultTableModel();

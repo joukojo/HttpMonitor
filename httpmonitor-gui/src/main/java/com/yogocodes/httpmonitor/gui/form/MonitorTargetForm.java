@@ -1,6 +1,7 @@
 package com.yogocodes.httpmonitor.gui.form;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JTextField;
@@ -13,8 +14,8 @@ public class MonitorTargetForm {
 	private final JLabel portLabel;
 	private final JLabel pathLabel; 
 	
-	private final JList protocolList;
-	private final JList methodList;
+	private final JComboBox protocolList;
+	private final JComboBox methodList;
 	private final JTextField serverTextField;
 	private final JTextField portTextField;
 	private final JTextField pathTextField; 
@@ -31,8 +32,8 @@ public class MonitorTargetForm {
 		
 		Object protocols[] = {"http", "https"};
 		Object methods[] = {"GET", "DELETE", "POST", "HEAD"}; 
-		protocolList = new JList(protocols);
-		methodList = new JList(methods);
+		protocolList = new JComboBox(protocols);
+		methodList = new JComboBox(methods);
 		serverTextField = new JTextField();
 		portTextField = new JTextField();
 		pathTextField = new JTextField(); 
@@ -61,11 +62,11 @@ public class MonitorTargetForm {
 		return pathLabel;
 	}
 
-	public JList getProtocolList() {
+	public JComboBox getProtocolList() {
 		return protocolList;
 	}
 
-	public JList getMethodList() {
+	public JComboBox getMethodList() {
 		return methodList;
 	}
 
