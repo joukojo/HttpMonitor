@@ -41,8 +41,8 @@ public class HttpMonitorAppFrame extends JFrame {
 		configurationPanel.add(configurationButtonPanel);
 		getContentPane().add(configurationPanel, BorderLayout.NORTH);
 		
-		JScrollPane resultPane = new JScrollPane(); 
-		resultPane.add(appForm.getMonitorResultTable());
+		JScrollPane resultPane = new JScrollPane(appForm.getMonitorResultTable()); 
+		
 		
 		JPanel executionButtonPanel = new JPanel(new GridLayout(1, 2));
 		executionButtonPanel.add(appForm.getStartMonitorButton());

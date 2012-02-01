@@ -16,6 +16,7 @@ public class HttpMonitorAppFrameFactory {
 		if( appFrameInstance == null ) {
 			synchronized (HttpMonitorAppFrameFactory.class) {
 				if( appFrameInstance == null ) {
+					LOG.debug("creating new application frame instance");
 					appFrameInstance = new HttpMonitorAppFrame();
 				}
 			}
