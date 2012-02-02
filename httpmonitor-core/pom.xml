@@ -4,11 +4,11 @@
 	<parent>
 		<artifactId>com.yogocodes.httpmonitor</artifactId>
 		<groupId>com.yogocodes.httpmonitor</groupId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.0.2-SNAPSHOT</version>
 	</parent>
 	<groupId>com.yogocodes.httpmonitor</groupId>
 	<artifactId>httpmonitor-core</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>HttpMonitorCore</name>
 	<description>HttpMonitor core functionalities</description>
 
