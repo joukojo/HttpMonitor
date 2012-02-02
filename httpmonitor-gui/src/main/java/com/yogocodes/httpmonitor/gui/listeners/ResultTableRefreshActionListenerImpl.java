@@ -13,22 +13,27 @@ import com.yogocodes.httpmonitor.gui.form.MonitorResultTableModel;
 
 public class ResultTableRefreshActionListenerImpl implements ActionListener {
 
-	private final static Logger LOG = LoggerFactory.getLogger(ResultTableRefreshActionListenerImpl.class);
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		LOG.debug("refreshing result table"); 
+	private final static Logger LOG = LoggerFactory
+			.getLogger(ResultTableRefreshActionListenerImpl.class);
 
-		HttpMonitorAppForm appFormInstance = HttpMonitorAppFormFactory.getAppFormInstance();
-		
-		MonitorResultTableModel tableModel = appFormInstance.getMonitorResultTableModel();
-		
-		MonitorResult result = new MonitorResult();
+	@Override
+	public void actionPerformed(final ActionEvent e) {
+		LOG.debug("refreshing result table");
+
+		final HttpMonitorAppForm appFormInstance = HttpMonitorAppFormFactory
+				.getAppFormInstance();
+
+		final MonitorResultTableModel tableModel = appFormInstance
+				.getMonitorResultTableModel();
+
+		final MonitorResult result = new MonitorResult();
 		result.setUrl("http://localhost/robots.txt");
-		result.setTime(12345l); 
-		tableModel.addResult(result );
+		result.setTime(12345l);
+		tableModel.clearData();
+		tableModel.addResult(result);
+
 		tableModel.fireTableDataChanged();
-		LOG.debug("refreshed result table"); 
+		LOG.debug("refreshed result table");
 	}
 
 }

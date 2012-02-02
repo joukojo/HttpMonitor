@@ -35,6 +35,8 @@ public class SaveMonitorTargetActionListenerImpl implements ActionListener {
 		target.setProtocol(monitorTargetForm.getProtocolList()
 				.getSelectedItem().toString());
 
+		// FIXME we are collected all data from the form, we could clean it
+
 		final HttpMonitorAppForm appFormInstance = HttpMonitorAppFormFactory
 				.getAppFormInstance();
 
@@ -44,6 +46,7 @@ public class SaveMonitorTargetActionListenerImpl implements ActionListener {
 		appFormInstance.getMonitoredHostList().validate();
 		appFormInstance.getMonitoredHostList().repaint();
 		HttpMonitorAppFrameFactory.getAppFrameInstance().repaint();
+		// Hide the frame
 		final ModifyTargetFrame modifyTargetFrame = ModifyTargetFrameFactory
 				.getFrameInstance();
 		modifyTargetFrame.setVisible(false);
