@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.yogocodes.httpmonitor.core.MonitorResult;
 import com.yogocodes.httpmonitor.core.MonitorResultSummarizer;
 import com.yogocodes.httpmonitor.core.MonitorResultSummarizerFactory;
 import com.yogocodes.httpmonitor.gui.form.HttpMonitorAppForm;
@@ -28,9 +27,6 @@ public class ResultTableRefreshActionListenerImpl implements ActionListener {
 		final MonitorResultTableModel tableModel = appFormInstance
 				.getMonitorResultTableModel();
 
-		final MonitorResult result = new MonitorResult();
-		result.setUrl("http://localhost/robots.txt");
-		result.setTime(12345l);
 		tableModel.clearData();
 		final MonitorResultSummarizer summarizer = MonitorResultSummarizerFactory
 				.getInstance();
