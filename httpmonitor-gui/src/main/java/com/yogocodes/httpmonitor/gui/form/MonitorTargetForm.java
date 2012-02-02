@@ -3,8 +3,10 @@ package com.yogocodes.httpmonitor.gui.form;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JTextField;
+
+import com.yogocodes.httpmonitor.gui.listeners.CancelMonitorTargetActionListenerImpl;
+import com.yogocodes.httpmonitor.gui.listeners.SaveMonitorTargetActionListenerImpl;
 
 public class MonitorTargetForm {
 
@@ -12,34 +14,40 @@ public class MonitorTargetForm {
 	private final JLabel methodLabel;
 	private final JLabel serverLabel;
 	private final JLabel portLabel;
-	private final JLabel pathLabel; 
-	
+	private final JLabel pathLabel;
+
 	private final JComboBox protocolList;
 	private final JComboBox methodList;
 	private final JTextField serverTextField;
 	private final JTextField portTextField;
-	private final JTextField pathTextField; 
-	
-	private final JButton saveButton; 
-	private final JButton cancelButton; 
-	
+	private final JTextField pathTextField;
+
+	private final JButton saveButton;
+	private final JButton cancelButton;
+
 	protected MonitorTargetForm() {
 		protocolLabel = new JLabel("protocol:");
 		methodLabel = new JLabel("method:");
 		serverLabel = new JLabel("server:");
 		portLabel = new JLabel("port:");
 		pathLabel = new JLabel("path:");
-		
-		Object protocols[] = {"http", "https"};
-		Object methods[] = {"GET", "DELETE", "POST", "HEAD"}; 
+
+		final Object protocols[] = { "http", "https" };
+		final Object methods[] = { "GET", "DELETE", "POST", "HEAD" };
 		protocolList = new JComboBox(protocols);
 		methodList = new JComboBox(methods);
 		serverTextField = new JTextField();
 		portTextField = new JTextField();
-		pathTextField = new JTextField(); 
-		
+		pathTextField = new JTextField();
+
 		saveButton = new JButton("save");
-		cancelButton = new JButton("cancel"); 
+		saveButton.addActionListener(new SaveMonitorTargetActionListenerImpl(
+				this));
+
+		cancelButton = new JButton("cancel");
+		cancelButton
+				.addActionListener(new CancelMonitorTargetActionListenerImpl(
+						this));
 	}
 
 	public JLabel getProtocolLabel() {
@@ -95,6 +103,5 @@ public class MonitorTargetForm {
 	public JButton getSaveButton() {
 		return saveButton;
 	}
-	
-	
+
 }

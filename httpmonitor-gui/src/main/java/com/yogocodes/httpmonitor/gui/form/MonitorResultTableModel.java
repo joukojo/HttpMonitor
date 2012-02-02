@@ -55,4 +55,9 @@ public class MonitorResultTableModel extends AbstractTableModel {
 		return -1;
 	}
 
+	public void clearData() {
+		results.clear();
+
+	}
+
 }
