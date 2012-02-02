@@ -5,21 +5,19 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import com.yogocodes.httpmonitor.core.MonitorResultSummary;
+
 public class MonitorResultTableModel extends AbstractTableModel {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final List<MonitorResult> results;
+	private volatile List<MonitorResultSummary> results;
 	private final String[] header = { "url", "delay" };
 
 	public MonitorResultTableModel() {
-		results = new ArrayList<MonitorResult>();
-	}
-
-	public void addResult(final MonitorResult result) {
-		results.add(result);
+		results = new ArrayList<MonitorResultSummary>();
 	}
 
 	@Override
@@ -30,7 +28,7 @@ public class MonitorResultTableModel extends AbstractTableModel {
 	@Override
 	public int getRowCount() {
 		// TODO Auto-generated method stub
-		return results.size();
+		return getResults().size();
 	}
 
 	@Override
@@ -42,11 +40,11 @@ public class MonitorResultTableModel extends AbstractTableModel {
 	@Override
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
 
-		final MonitorResult result = results.get(rowIndex);
+		final MonitorResultSummary result = getResults().get(rowIndex);
 
 		switch (columnIndex) {
 		case 0:
-			return result.getUrl();
+			return result.getHost();
 
 		case 1:
 			return result.getTime();
@@ -56,8 +54,15 @@ public class MonitorResultTableModel extends AbstractTableModel {
 	}
 
 	public void clearData() {
-		results.clear();
+		getResults().clear();
 
+	}
+
+	/**
+	 * @return the results
+	 */
+	public List<MonitorResultSummary> getResults() {
+		return results;
 	}
 
 }

@@ -6,9 +6,11 @@ import java.awt.event.ActionListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.yogocodes.httpmonitor.core.MonitorResult;
+import com.yogocodes.httpmonitor.core.MonitorResultSummarizer;
+import com.yogocodes.httpmonitor.core.MonitorResultSummarizerFactory;
 import com.yogocodes.httpmonitor.gui.form.HttpMonitorAppForm;
 import com.yogocodes.httpmonitor.gui.form.HttpMonitorAppFormFactory;
-import com.yogocodes.httpmonitor.gui.form.MonitorResult;
 import com.yogocodes.httpmonitor.gui.form.MonitorResultTableModel;
 
 public class ResultTableRefreshActionListenerImpl implements ActionListener {
@@ -30,7 +32,9 @@ public class ResultTableRefreshActionListenerImpl implements ActionListener {
 		result.setUrl("http://localhost/robots.txt");
 		result.setTime(12345l);
 		tableModel.clearData();
-		tableModel.addResult(result);
+		final MonitorResultSummarizer summarizer = MonitorResultSummarizerFactory
+				.getInstance();
+		tableModel.getResults().addAll(summarizer.getSummaries());
 
 		tableModel.fireTableDataChanged();
 		LOG.debug("refreshed result table");
