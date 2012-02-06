@@ -18,6 +18,8 @@ import javax.swing.JSeparator;
 
 import com.yogocodes.httpmonitor.gui.form.HttpMonitorAppForm;
 import com.yogocodes.httpmonitor.gui.form.HttpMonitorAppFormFactory;
+import com.yogocodes.httpmonitor.gui.listeners.StartMonitoringActionListenerImpl;
+import com.yogocodes.httpmonitor.gui.listeners.StopMonitoringActionListenerImpl;
 
 /**
  * @author joukojo
@@ -35,8 +37,7 @@ public class HttpMonitorAppFrame extends JFrame {
 		setSize(500, 500);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		final HttpMonitorAppForm appForm = HttpMonitorAppFormFactory
-				.getAppFormInstance();
+		final HttpMonitorAppForm appForm = HttpMonitorAppFormFactory.getAppFormInstance();
 
 		final JMenuBar menuBar = new JMenuBar();
 		final JMenu fileMenu = new JMenu("File");
@@ -64,7 +65,9 @@ public class HttpMonitorAppFrame extends JFrame {
 
 		final JMenu monitorMenu = new JMenu("Monitor");
 		final JMenuItem monitorStartItem = new JMenuItem("Start");
+		monitorStartItem.addActionListener(new StartMonitoringActionListenerImpl());
 		final JMenuItem monitorEndItem = new JMenuItem("Stop");
+		monitorEndItem.addActionListener(new StopMonitoringActionListenerImpl());
 		monitorMenu.add(monitorStartItem);
 		monitorMenu.add(monitorEndItem);
 		final JMenu aboutMenu = new JMenu("About");
@@ -84,8 +87,7 @@ public class HttpMonitorAppFrame extends JFrame {
 		configurationPanel.add(configurationButtonPanel);
 		getContentPane().add(configurationPanel, BorderLayout.NORTH);
 
-		final JScrollPane resultPane = new JScrollPane(
-				appForm.getMonitorResultTable());
+		final JScrollPane resultPane = new JScrollPane(appForm.getMonitorResultTable());
 
 		final JPanel executionButtonPanel = new JPanel(new GridLayout(1, 3));
 		executionButtonPanel.add(appForm.getStartMonitorButton());

@@ -5,9 +5,12 @@ import java.io.IOException;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class HttpMonitorEngineWorker implements Runnable {
 
+	private final static Logger LOG = LoggerFactory.getLogger(HttpMonitorEngineWorker.class);
 	private MonitorTarget target;
 
 	@Override
@@ -40,17 +43,20 @@ public class HttpMonitorEngineWorker implements Runnable {
 				result.setExecuteTime(start);
 				summarizer.addResult(result);
 				writer.writeCSVLog(result);
-				Thread.sleep(1000);
 
 			} catch (final HttpException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOG.error("failed to create request to target:" + e.getMessage(), e);
 			} catch (final IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOG.error("failed to create request to target:" + e.getMessage(), e);
+			}
+
+			try {
+				Thread.sleep(1000);
 			} catch (final InterruptedException e) {
+				LOG.error("the thread sleep was interrupted, interruptting current one");
 				Thread.currentThread().interrupt();
 			}
+
 		}
 
 	}

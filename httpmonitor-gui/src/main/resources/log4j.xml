@@ -10,7 +10,7 @@
   </appender> 
 
 	<logger name="org.apache.commons.httpclient">
-		<level value="warn" />
+		<level value="error" />
 	</logger>
 
 	<logger name="httpclient.wire">
