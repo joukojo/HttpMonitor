@@ -53,7 +53,7 @@ public class HttpMonitorEngineWorker implements Runnable {
 			try {
 				Thread.sleep(1000);
 			} catch (final InterruptedException e) {
-				LOG.error("the thread sleep was interrupted, interruptting current one");
+				LOG.error("the thread sleep was interrupted, interruptting current one", e);
 				Thread.currentThread().interrupt();
 			}
 
