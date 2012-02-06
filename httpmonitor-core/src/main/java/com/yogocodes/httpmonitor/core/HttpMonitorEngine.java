@@ -29,7 +29,8 @@ public class HttpMonitorEngine {
 			isRunning = true;
 
 			executorService = Executors.newFixedThreadPool(getTargets().size());
-
+			final SystemPropertyContainer containerInstance = SystemPropertyContainerFactory.getContainerInstance();
+			containerInstance.setExecutionStartTime(System.currentTimeMillis());
 			final List<HttpMonitorEngineWorker> workers = new ArrayList<HttpMonitorEngineWorker>();
 
 			for (final MonitorTarget target : getTargets()) {

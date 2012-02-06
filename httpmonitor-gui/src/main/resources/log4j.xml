@@ -10,14 +10,14 @@
   </appender> 
 
 	<logger name="org.apache.commons.httpclient">
-		<level value="WARN" />
+		<level value="warn" />
 	</logger>
 
 	<logger name="httpclient.wire">
-		<level value="WARN" />
+		<level value="warn" />
 	</logger>
   <root> 
-    <priority value ="DEBUG" /> 
+    <priority value ="warn" /> 
     <appender-ref ref="console" /> 
   </root>
   

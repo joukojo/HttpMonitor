@@ -16,15 +16,14 @@ public class ModifyTargetFrame extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	
-	
 	public ModifyTargetFrame() {
-		super("Add target"); 
-		
-		setSize(200, 200); 
-		MonitorTargetForm monitorTargetForm = MonitorTargetFormFactory.getMonitorTargetFormInstance();
-		
-		JPanel formPanel = new JPanel(new GridLayout(5, 2));
+		super("Add target");
+
+		setSize(200, 200);
+		final MonitorTargetForm monitorTargetForm = MonitorTargetFormFactory
+				.getMonitorTargetFormInstance();
+
+		final JPanel formPanel = new JPanel(new GridLayout(5, 2));
 		formPanel.add(monitorTargetForm.getProtocolLabel());
 		formPanel.add(monitorTargetForm.getProtocolList());
 		formPanel.add(monitorTargetForm.getMethodLabel());
@@ -35,15 +34,14 @@ public class ModifyTargetFrame extends JFrame {
 		formPanel.add(monitorTargetForm.getPortTextField());
 		formPanel.add(monitorTargetForm.getPathLabel());
 		formPanel.add(monitorTargetForm.getPathTextField());
-		
-		JPanel buttonPanel = new JPanel(new GridLayout(1, 2));
-		
+
+		final JPanel buttonPanel = new JPanel(new GridLayout(1, 2));
+
 		buttonPanel.add(monitorTargetForm.getSaveButton());
 		buttonPanel.add(monitorTargetForm.getCancelButton());
-		
+
 		getContentPane().add(formPanel, BorderLayout.CENTER);
-		getContentPane().add(buttonPanel, BorderLayout.SOUTH); 
-		
-		
+		getContentPane().add(buttonPanel, BorderLayout.SOUTH);
+
 	}
 }

@@ -14,7 +14,8 @@ public class MonitorResultTableModel extends AbstractTableModel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private volatile List<MonitorResultSummary> results;
-	private final String[] header = { "url", "delay" };
+	private final String[] header = { "url", "count", "delay", "average",
+			"min", "max" };
 
 	public MonitorResultTableModel() {
 		results = new ArrayList<MonitorResultSummary>();
@@ -47,9 +48,16 @@ public class MonitorResultTableModel extends AbstractTableModel {
 			return result.getHost();
 
 		case 1:
+			return result.getNumberOfRequests();
+		case 2:
 			return result.getTime();
+		case 3:
+			return result.getTotalTime() / result.getNumberOfRequests();
+		case 4:
+			return result.getMinTime();
+		case 5:
+			return result.getMaxTime();
 		}
-
 		return -1;
 	}
 

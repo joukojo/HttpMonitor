@@ -12,12 +12,12 @@ public class HttpMonitorEngineWorker implements Runnable {
 
 	@Override
 	public void run() {
-		final HttpMonitorEngine engineInstance = HttpMonitorEngineFactory
-				.getEngineInstance();
+		final HttpMonitorEngine engineInstance = HttpMonitorEngineFactory.getEngineInstance();
 
 		final HttpClient httpClient = new HttpClient();
-		final MonitorResultSummarizer summarizer = MonitorResultSummarizerFactory
-				.getInstance();
+		final MonitorResultSummarizer summarizer = MonitorResultSummarizerFactory.getInstance();
+
+		final MonitorLogWriter writer = new MonitorLogWriter();
 		while (engineInstance.isRunning()) {
 			final GetMethod method = new GetMethod(target.toString());
 
@@ -25,13 +25,21 @@ public class HttpMonitorEngineWorker implements Runnable {
 				final long start = System.currentTimeMillis();
 				// FIXME add support for statuscode
 				final int statusCode = httpClient.executeMethod(method);
+				int numOfBytes = 0;
+				if (statusCode == 200) {
+					final byte[] response = method.getResponseBody();
+					numOfBytes = response.length;
+				}
 				final long end = System.currentTimeMillis();
 
 				final MonitorResult result = new MonitorResult();
 				result.setUrl(target.toString());
 				result.setTime((end - start));
-
+				result.setStatusCode(statusCode);
+				result.setNumberOfBytes(numOfBytes);
+				result.setExecuteTime(start);
 				summarizer.addResult(result);
+				writer.writeCSVLog(result);
 				Thread.sleep(1000);
 
 			} catch (final HttpException e) {

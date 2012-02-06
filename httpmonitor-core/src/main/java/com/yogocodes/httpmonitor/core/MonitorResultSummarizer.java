@@ -22,9 +22,20 @@ public class MonitorResultSummarizer {
 			summary = new MonitorResultSummary();
 			summary.setHost(url);
 		}
+		final Long time = result.getTime();
+		summary.setTime(time);
 
-		summary.setTime(result.getTime());
+		final long minTime = summary.getMinTime();
 
+		if (time < minTime) {
+			summary.setMinTime(time);
+		}
+		final long maxTime = summary.getMaxTime();
+		if (time > maxTime) {
+			summary.setMaxTime(time);
+		}
+		summary.setTotalTime(summary.getTotalTime() + time);
+		summary.setNumberOfRequests(summary.getNumberOfRequests() + 1);
 		resultSummaries.put(url, summary);
 	}
 
@@ -34,7 +45,7 @@ public class MonitorResultSummarizer {
 
 	public List<MonitorResultSummary> getSummaries() {
 
-		return new ArrayList(resultSummaries.values());
+		return new ArrayList<MonitorResultSummary>(resultSummaries.values());
 	}
 
 }

@@ -15,6 +15,7 @@ import javax.swing.Timer;
 
 import com.yogocodes.httpmonitor.core.MonitorTarget;
 import com.yogocodes.httpmonitor.gui.listeners.AddNewHostActionListenerImpl;
+import com.yogocodes.httpmonitor.gui.listeners.ClearMonitorResults;
 import com.yogocodes.httpmonitor.gui.listeners.EnableDisableButtonActionListenerImpl;
 import com.yogocodes.httpmonitor.gui.listeners.ResultTableRefreshActionListenerImpl;
 import com.yogocodes.httpmonitor.gui.listeners.StartMonitoringActionListenerImpl;
@@ -33,6 +34,7 @@ public class HttpMonitorAppForm implements Serializable {
 
 	private final JButton addHostButton;
 	private final JButton removeHostButton;
+	private final JButton clearResultButton;
 	private final JButton editHostButton;
 	private final JTable monitorResultTable;
 	private final MonitorResultTableModel monitorResultTableModel;
@@ -55,7 +57,7 @@ public class HttpMonitorAppForm implements Serializable {
 		startMonitorButton = new JButton("Start");
 		stopMonitorButton = new JButton("Stop");
 		stopMonitorButton.setEnabled(false);
-
+		clearResultButton = new JButton("Clear");
 		monitorTargets = new ArrayList<MonitorTarget>();
 		targetHostListModel = new DefaultListModel();
 		final MonitorTarget target = new MonitorTarget();
@@ -76,6 +78,7 @@ public class HttpMonitorAppForm implements Serializable {
 		stopMonitorButton.addActionListener(buttonListener);
 		stopMonitorButton
 				.addActionListener(new StopMonitoringActionListenerImpl());
+		getClearResultButton().addActionListener(new ClearMonitorResults(this));
 		resultTableRefreshTimer = new Timer(500,
 				new ResultTableRefreshActionListenerImpl());
 	}
@@ -163,6 +166,13 @@ public class HttpMonitorAppForm implements Serializable {
 			targetHostListModel.addElement(target.toString());
 		}
 
+	}
+
+	/**
+	 * @return the clearResultButton
+	 */
+	public JButton getClearResultButton() {
+		return clearResultButton;
 	}
 
 }
