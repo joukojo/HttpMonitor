@@ -15,7 +15,7 @@ import javax.swing.Timer;
 
 import com.yogocodes.httpmonitor.core.MonitorTarget;
 import com.yogocodes.httpmonitor.gui.listeners.AddNewHostActionListenerImpl;
-import com.yogocodes.httpmonitor.gui.listeners.ClearMonitorResults;
+import com.yogocodes.httpmonitor.gui.listeners.ClearMonitorResultsActionListenerImpl;
 import com.yogocodes.httpmonitor.gui.listeners.EditHostActionListener;
 import com.yogocodes.httpmonitor.gui.listeners.EnableDisableButtonActionListenerImpl;
 import com.yogocodes.httpmonitor.gui.listeners.RemoveHostActionListener;
@@ -79,7 +79,7 @@ public class HttpMonitorAppForm implements Serializable {
 		startMonitorButton.addActionListener(new StartMonitoringActionListenerImpl());
 		stopMonitorButton.addActionListener(buttonListener);
 		stopMonitorButton.addActionListener(new StopMonitoringActionListenerImpl());
-		getClearResultButton().addActionListener(new ClearMonitorResults(this));
+		getClearResultButton().addActionListener(new ClearMonitorResultsActionListenerImpl(this));
 		resultTableRefreshTimer = new Timer(500, new ResultTableRefreshActionListenerImpl());
 	}
 

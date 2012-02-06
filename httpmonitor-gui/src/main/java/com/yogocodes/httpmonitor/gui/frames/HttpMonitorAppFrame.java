@@ -18,6 +18,7 @@ import javax.swing.JSeparator;
 
 import com.yogocodes.httpmonitor.gui.form.HttpMonitorAppForm;
 import com.yogocodes.httpmonitor.gui.form.HttpMonitorAppFormFactory;
+import com.yogocodes.httpmonitor.gui.listeners.AboutMenuActionListener;
 import com.yogocodes.httpmonitor.gui.listeners.StartMonitoringActionListenerImpl;
 import com.yogocodes.httpmonitor.gui.listeners.StopMonitoringActionListenerImpl;
 
@@ -70,11 +71,14 @@ public class HttpMonitorAppFrame extends JFrame {
 		monitorEndItem.addActionListener(new StopMonitoringActionListenerImpl());
 		monitorMenu.add(monitorStartItem);
 		monitorMenu.add(monitorEndItem);
-		final JMenu aboutMenu = new JMenu("About");
+		final JMenu helpMenu = new JMenu("Help");
 
+		final JMenuItem aboutMenutItem = new JMenuItem("About");
+		aboutMenutItem.addActionListener(new AboutMenuActionListener());
+		helpMenu.add(aboutMenutItem);
 		menuBar.add(fileMenu);
 		menuBar.add(monitorMenu);
-		menuBar.add(aboutMenu);
+		menuBar.add(helpMenu);
 
 		setJMenuBar(menuBar);
 
