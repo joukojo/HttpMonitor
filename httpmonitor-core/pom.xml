@@ -22,12 +22,20 @@
 		<dependency>
 			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
-			<version>3.1</version> 
+			<version>3.1</version>
 		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef></descriptorRef>
+					</descriptorRefs>
+				</configuration>
+			</plugin>
 
 		</plugins>
 		<finalName>httpmonitor-core</finalName>
