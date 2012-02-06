@@ -4,7 +4,12 @@ import java.io.IOException;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
+import org.apache.commons.httpclient.HttpMethod;
+import org.apache.commons.httpclient.methods.DeleteMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.methods.HeadMethod;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.methods.TraceMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +27,8 @@ public class HttpMonitorEngineWorker implements Runnable {
 
 		final MonitorLogWriter writer = new MonitorLogWriter();
 		while (engineInstance.isRunning()) {
-			final GetMethod method = new GetMethod(target.toString());
+
+			final HttpMethod method = createMethod(target);
 
 			try {
 				final long start = System.currentTimeMillis();
@@ -59,6 +65,22 @@ public class HttpMonitorEngineWorker implements Runnable {
 
 		}
 
+	}
+
+	protected HttpMethod createMethod(final MonitorTarget target) {
+		if ("GET".equals(target.getMethod())) {
+			return new GetMethod(target.toString());
+		} else if ("POST".equals(target.getMethod())) {
+			return new PostMethod(target.toString());
+		} else if ("HEAD".equals(target.getMethod())) {
+			return new HeadMethod(target.toString());
+		} else if ("TRACE".equals(target.getMethod())) {
+			return new TraceMethod(target.toString());
+		} else if ("DELETE".equals(target.getMethod())) {
+			return new DeleteMethod(target.toString());
+		}
+
+		return null;
 	}
 
 	public void setValues(final MonitorTarget target) {
