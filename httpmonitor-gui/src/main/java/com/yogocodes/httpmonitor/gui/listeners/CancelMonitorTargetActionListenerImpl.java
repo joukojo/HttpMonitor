@@ -11,19 +11,15 @@ public class CancelMonitorTargetActionListenerImpl implements ActionListener {
 
 	private final MonitorTargetForm monitorTargetForm;
 
-	public CancelMonitorTargetActionListenerImpl(
-			final MonitorTargetForm monitorTargetForm) {
+	public CancelMonitorTargetActionListenerImpl(final MonitorTargetForm monitorTargetForm) {
 		this.monitorTargetForm = monitorTargetForm;
 	}
 
 	@Override
 	public void actionPerformed(final ActionEvent e) {
-		final ModifyTargetFrame modifyTargetFrame = ModifyTargetFrameFactory
-				.getFrameInstance();
+		final ModifyTargetFrame modifyTargetFrame = ModifyTargetFrameFactory.getFrameInstance();
 
-		// FIXME if we're cancelling the frame, we could be nice and clean
-		// the form object
-
+		monitorTargetForm.clear();
 		modifyTargetFrame.setVisible(false);
 		modifyTargetFrame.setEnabled(false);
 

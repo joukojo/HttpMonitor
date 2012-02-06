@@ -16,7 +16,9 @@ import javax.swing.Timer;
 import com.yogocodes.httpmonitor.core.MonitorTarget;
 import com.yogocodes.httpmonitor.gui.listeners.AddNewHostActionListenerImpl;
 import com.yogocodes.httpmonitor.gui.listeners.ClearMonitorResults;
+import com.yogocodes.httpmonitor.gui.listeners.EditHostActionListener;
 import com.yogocodes.httpmonitor.gui.listeners.EnableDisableButtonActionListenerImpl;
+import com.yogocodes.httpmonitor.gui.listeners.RemoveHostActionListener;
 import com.yogocodes.httpmonitor.gui.listeners.ResultTableRefreshActionListenerImpl;
 import com.yogocodes.httpmonitor.gui.listeners.StartMonitoringActionListenerImpl;
 import com.yogocodes.httpmonitor.gui.listeners.StopMonitoringActionListenerImpl;
@@ -50,7 +52,9 @@ public class HttpMonitorAppForm implements Serializable {
 		addHostButton = new JButton("Add");
 		addHostButton.addActionListener(new AddNewHostActionListenerImpl());
 		removeHostButton = new JButton("Remove");
+		removeHostButton.addActionListener(new RemoveHostActionListener());
 		editHostButton = new JButton("Edit");
+		editHostButton.addActionListener(new EditHostActionListener());
 		monitorResultTableModel = new MonitorResultTableModel();
 		monitorResultTable = new JTable();
 		monitorResultTable.setModel(monitorResultTableModel);
@@ -70,17 +74,13 @@ public class HttpMonitorAppForm implements Serializable {
 		refreshHostList();
 		monitoredHostList = new JList(this.getTargetHostListModel());
 
-		final EnableDisableButtonActionListenerImpl buttonListener = new EnableDisableButtonActionListenerImpl(
-				startMonitorButton, stopMonitorButton);
+		final EnableDisableButtonActionListenerImpl buttonListener = new EnableDisableButtonActionListenerImpl(startMonitorButton, stopMonitorButton);
 		startMonitorButton.addActionListener(buttonListener);
-		startMonitorButton
-				.addActionListener(new StartMonitoringActionListenerImpl());
+		startMonitorButton.addActionListener(new StartMonitoringActionListenerImpl());
 		stopMonitorButton.addActionListener(buttonListener);
-		stopMonitorButton
-				.addActionListener(new StopMonitoringActionListenerImpl());
+		stopMonitorButton.addActionListener(new StopMonitoringActionListenerImpl());
 		getClearResultButton().addActionListener(new ClearMonitorResults(this));
-		resultTableRefreshTimer = new Timer(500,
-				new ResultTableRefreshActionListenerImpl());
+		resultTableRefreshTimer = new Timer(500, new ResultTableRefreshActionListenerImpl());
 	}
 
 	/**

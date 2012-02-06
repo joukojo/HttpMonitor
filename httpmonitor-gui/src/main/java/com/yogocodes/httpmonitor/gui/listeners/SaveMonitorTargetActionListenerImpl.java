@@ -15,8 +15,7 @@ public class SaveMonitorTargetActionListenerImpl implements ActionListener {
 
 	private final MonitorTargetForm monitorTargetForm;
 
-	public SaveMonitorTargetActionListenerImpl(
-			final MonitorTargetForm monitorTargetForm) {
+	public SaveMonitorTargetActionListenerImpl(final MonitorTargetForm monitorTargetForm) {
 
 		this.monitorTargetForm = monitorTargetForm;
 
@@ -27,18 +26,13 @@ public class SaveMonitorTargetActionListenerImpl implements ActionListener {
 
 		final MonitorTarget target = new MonitorTarget();
 		target.setHost(monitorTargetForm.getServerTextField().getText());
-		target.setMethod(monitorTargetForm.getMethodList().getSelectedItem()
-				.toString());
+		target.setMethod(monitorTargetForm.getMethodList().getSelectedItem().toString());
 		target.setPath(monitorTargetForm.getPathTextField().getText());
-		target.setPort(Integer.valueOf(monitorTargetForm.getPortTextField()
-				.getText()));
-		target.setProtocol(monitorTargetForm.getProtocolList()
-				.getSelectedItem().toString());
+		target.setPort(Integer.valueOf(monitorTargetForm.getPortTextField().getText()));
+		target.setProtocol(monitorTargetForm.getProtocolList().getSelectedItem().toString());
 
-		// FIXME we are collected all data from the form, we could clean it
-
-		final HttpMonitorAppForm appFormInstance = HttpMonitorAppFormFactory
-				.getAppFormInstance();
+		monitorTargetForm.clear();
+		final HttpMonitorAppForm appFormInstance = HttpMonitorAppFormFactory.getAppFormInstance();
 
 		appFormInstance.getMonitorTargets().add(target);
 
@@ -47,8 +41,7 @@ public class SaveMonitorTargetActionListenerImpl implements ActionListener {
 		appFormInstance.getMonitoredHostList().repaint();
 		HttpMonitorAppFrameFactory.getAppFrameInstance().repaint();
 		// Hide the frame
-		final ModifyTargetFrame modifyTargetFrame = ModifyTargetFrameFactory
-				.getFrameInstance();
+		final ModifyTargetFrame modifyTargetFrame = ModifyTargetFrameFactory.getFrameInstance();
 		modifyTargetFrame.setVisible(false);
 		modifyTargetFrame.setEnabled(false);
 

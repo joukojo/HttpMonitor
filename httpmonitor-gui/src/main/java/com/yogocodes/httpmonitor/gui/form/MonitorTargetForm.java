@@ -5,6 +5,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import com.yogocodes.httpmonitor.core.MonitorTarget;
 import com.yogocodes.httpmonitor.gui.listeners.CancelMonitorTargetActionListenerImpl;
 import com.yogocodes.httpmonitor.gui.listeners.SaveMonitorTargetActionListenerImpl;
 
@@ -41,13 +42,18 @@ public class MonitorTargetForm {
 		pathTextField = new JTextField();
 
 		saveButton = new JButton("save");
-		saveButton.addActionListener(new SaveMonitorTargetActionListenerImpl(
-				this));
+		saveButton.addActionListener(new SaveMonitorTargetActionListenerImpl(this));
 
 		cancelButton = new JButton("cancel");
-		cancelButton
-				.addActionListener(new CancelMonitorTargetActionListenerImpl(
-						this));
+		cancelButton.addActionListener(new CancelMonitorTargetActionListenerImpl(this));
+	}
+
+	public void clear() {
+		portTextField.setText("");
+		serverTextField.setText("");
+		pathTextField.setText("");
+		protocolList.setSelectedIndex(-1);
+		methodList.setSelectedIndex(-1);
 	}
 
 	public JLabel getProtocolLabel() {
@@ -102,6 +108,15 @@ public class MonitorTargetForm {
 	 */
 	public JButton getSaveButton() {
 		return saveButton;
+	}
+
+	public void setValues(final MonitorTarget target) {
+		// FIXME handle method adn protocol
+		target.getMethod();
+		target.getProtocol();
+		this.serverTextField.setText(target.getHost());
+		this.portTextField.setText("" + target.getPort());
+		this.pathTextField.setText(target.getPath());
 	}
 
 }
