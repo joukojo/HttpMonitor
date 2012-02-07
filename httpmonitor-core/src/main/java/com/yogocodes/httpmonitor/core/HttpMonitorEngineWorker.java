@@ -13,11 +13,25 @@ import org.apache.commons.httpclient.methods.TraceMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Runnable class for running method in a separate thread.
+ * 
+ * @author joukojo
+ * 
+ */
 public class HttpMonitorEngineWorker implements Runnable {
 
 	private final static Logger LOG = LoggerFactory.getLogger(HttpMonitorEngineWorker.class);
 	private MonitorTarget target;
 
+	/**
+	 * The run method for the worker.
+	 * 
+	 * @see HttpMonitorEngine monitor engine.
+	 * @see MonitorResultSummarizer summarization of the results.
+	 * @see MonitorLogWriter writing result log
+	 * @see HttpMonitorEngine#isRunning() for getting the run flag.
+	 */
 	@Override
 	public void run() {
 		final HttpMonitorEngine engineInstance = HttpMonitorEngineFactory.getEngineInstance();
@@ -32,7 +46,7 @@ public class HttpMonitorEngineWorker implements Runnable {
 
 			try {
 				final long start = System.currentTimeMillis();
-				// FIXME add support for statuscode
+
 				final int statusCode = httpClient.executeMethod(method);
 				int numOfBytes = 0;
 				if (statusCode == 200) {
@@ -67,6 +81,14 @@ public class HttpMonitorEngineWorker implements Runnable {
 
 	}
 
+	/**
+	 * Creates a suitable method based on target
+	 * 
+	 * @param target
+	 * @return HttpMethod for corresponding method.
+	 * @see MonitorTarget#getMethod()
+	 */
+
 	protected HttpMethod createMethod(final MonitorTarget target) {
 		if ("GET".equals(target.getMethod())) {
 			return new GetMethod(target.toString());
@@ -83,6 +105,12 @@ public class HttpMonitorEngineWorker implements Runnable {
 		return null;
 	}
 
+	/**
+	 * Set the target for the worker.
+	 * 
+	 * @param target
+	 *            monitor target
+	 */
 	public void setValues(final MonitorTarget target) {
 		this.target = target;
 	}

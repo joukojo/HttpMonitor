@@ -5,14 +5,32 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Creates a summary from given results. To create a instance use the factory
+ * class.
+ * 
+ * @author joukojo
+ * @see MonitorResultSummarizerFactory
+ * 
+ */
 public class MonitorResultSummarizer {
 
 	private final Map<String, MonitorResultSummary> resultSummaries;
 
-	public MonitorResultSummarizer() {
+	/**
+	 * Default constructor
+	 * 
+	 */
+	protected MonitorResultSummarizer() {
 		resultSummaries = new HashMap<String, MonitorResultSummary>();
 	}
 
+	/**
+	 * Add monitor result and calculates the summary
+	 * 
+	 * @param result
+	 *            from monitorworker
+	 */
 	public void addResult(final MonitorResult result) {
 		final String url = result.getUrl();
 		MonitorResultSummary summary;
@@ -39,10 +57,19 @@ public class MonitorResultSummarizer {
 		resultSummaries.put(url, summary);
 	}
 
+	/**
+	 * Clears the summaries
+	 */
 	public void clearResults() {
 		resultSummaries.clear();
 	}
 
+	/**
+	 * Gets the summaries.
+	 * 
+	 * @return list of summaries
+	 * @see MonitorResultSummary
+	 */
 	public List<MonitorResultSummary> getSummaries() {
 
 		return new ArrayList<MonitorResultSummary>(resultSummaries.values());

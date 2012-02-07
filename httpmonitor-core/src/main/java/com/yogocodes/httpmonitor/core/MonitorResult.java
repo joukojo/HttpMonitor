@@ -3,6 +3,12 @@ package com.yogocodes.httpmonitor.core;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Result container.
+ * 
+ * @author joukojo
+ * 
+ */
 public class MonitorResult {
 
 	private String url;
@@ -11,6 +17,11 @@ public class MonitorResult {
 	private Integer numberOfBytes;
 	private Long executeTime;
 
+	/**
+	 * Converts container to CSV line.
+	 * 
+	 * @return csv formatted line.
+	 */
 	public String toCSVLine() {
 		final StringBuilder builder = new StringBuilder();
 

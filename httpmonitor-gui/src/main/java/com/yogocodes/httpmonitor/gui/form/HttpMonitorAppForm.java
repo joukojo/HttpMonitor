@@ -3,6 +3,8 @@
  */
 package com.yogocodes.httpmonitor.gui.form;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +12,15 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.Timer;
 
 import com.yogocodes.httpmonitor.core.MonitorTarget;
+import com.yogocodes.httpmonitor.gui.listeners.AboutMenuActionListener;
 import com.yogocodes.httpmonitor.gui.listeners.AddNewHostActionListenerImpl;
 import com.yogocodes.httpmonitor.gui.listeners.ClearMonitorResultsActionListenerImpl;
 import com.yogocodes.httpmonitor.gui.listeners.EditHostActionListener;
@@ -48,6 +55,8 @@ public class HttpMonitorAppForm implements Serializable {
 
 	private final DefaultListModel targetHostListModel;
 
+	private final JMenuBar menuBar;
+
 	public HttpMonitorAppForm() {
 		addHostButton = new JButton("Add");
 		addHostButton.addActionListener(new AddNewHostActionListenerImpl());
@@ -79,8 +88,53 @@ public class HttpMonitorAppForm implements Serializable {
 		startMonitorButton.addActionListener(new StartMonitoringActionListenerImpl());
 		stopMonitorButton.addActionListener(buttonListener);
 		stopMonitorButton.addActionListener(new StopMonitoringActionListenerImpl());
-		getClearResultButton().addActionListener(new ClearMonitorResultsActionListenerImpl(this));
+		getClearResultButton().addActionListener(new ClearMonitorResultsActionListenerImpl());
 		resultTableRefreshTimer = new Timer(500, new ResultTableRefreshActionListenerImpl());
+
+		menuBar = new JMenuBar();
+		final JMenu fileMenu = new JMenu("File");
+		final JMenuItem newFileItem = new JMenuItem("New");
+		final JMenuItem openFileItem = new JMenuItem("Open");
+		final JMenuItem saveConfigFileItem = new JMenuItem("Save config");
+		final JMenuItem saveResultFileItem = new JMenuItem("Save results");
+		final JMenuItem exitFileItem = new JMenuItem("Exit");
+		exitFileItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(final ActionEvent e) {
+				System.exit(0);
+
+			}
+		});
+		final JSeparator separator = new JSeparator();
+		fileMenu.add(newFileItem);
+		fileMenu.add(openFileItem);
+
+		fileMenu.add(saveConfigFileItem);
+		fileMenu.add(saveResultFileItem);
+		fileMenu.add(separator);
+		fileMenu.add(exitFileItem);
+
+		final JMenu monitorMenu = new JMenu("Monitor");
+		final JMenuItem monitorStartItem = new JMenuItem("Start");
+		monitorStartItem.addActionListener(new StartMonitoringActionListenerImpl());
+		monitorStartItem.addActionListener(buttonListener);
+		final JMenuItem monitorEndItem = new JMenuItem("Stop");
+		monitorEndItem.addActionListener(new StopMonitoringActionListenerImpl());
+		monitorEndItem.addActionListener(buttonListener);
+		monitorMenu.add(monitorStartItem);
+		monitorMenu.add(monitorEndItem);
+		final JMenu helpMenu = new JMenu("Help");
+
+		final JMenuItem aboutMenutItem = new JMenuItem("About");
+		aboutMenutItem.addActionListener(new AboutMenuActionListener());
+		helpMenu.add(aboutMenutItem);
+		getMenuBar().add(fileMenu);
+		getMenuBar().add(monitorMenu);
+		getMenuBar().add(helpMenu);
+
+		// setJMenuBar(menuBar);
+
 	}
 
 	/**
@@ -173,6 +227,13 @@ public class HttpMonitorAppForm implements Serializable {
 	 */
 	public JButton getClearResultButton() {
 		return clearResultButton;
+	}
+
+	/**
+	 * @return the menuBar
+	 */
+	public JMenuBar getMenuBar() {
+		return menuBar;
 	}
 
 }
