@@ -31,13 +31,17 @@ import com.yogocodes.httpmonitor.gui.listeners.StartMonitoringActionListenerImpl
 import com.yogocodes.httpmonitor.gui.listeners.StopMonitoringActionListenerImpl;
 
 /**
+ * Application main form object which is used as a value container. For creating
+ * instace use the factory class.
+ * 
  * @author joukojo
+ * @see HttpMonitorAppFormFactory#getAppFormInstance()
  * 
  */
 public class HttpMonitorAppForm implements Serializable {
 
 	/**
-	 * 
+	 * serial uid
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -57,7 +61,10 @@ public class HttpMonitorAppForm implements Serializable {
 
 	private final JMenuBar menuBar;
 
-	public HttpMonitorAppForm() {
+	/**
+	 * Default constructor which initializes all the components.
+	 */
+	protected HttpMonitorAppForm() {
 		addHostButton = new JButton("Add");
 		addHostButton.addActionListener(new AddNewHostActionListenerImpl());
 		removeHostButton = new JButton("Remove");
@@ -138,82 +145,11 @@ public class HttpMonitorAppForm implements Serializable {
 	}
 
 	/**
-	 * @return the startMonitorButton
+	 * Refresh the host list.
+	 * 
+	 * @see #targetHostListModel
+	 * @see #monitorTargets
 	 */
-	public JButton getStartMonitorButton() {
-		return startMonitorButton;
-	}
-
-	/**
-	 * @return the stopMonitorButton
-	 */
-	public JButton getStopMonitorButton() {
-		return stopMonitorButton;
-	}
-
-	/**
-	 * @return the addHostButton
-	 */
-	public JButton getAddHostButton() {
-		return addHostButton;
-	}
-
-	/**
-	 * @return the removeHostButton
-	 */
-	public JButton getRemoveHostButton() {
-		return removeHostButton;
-	}
-
-	/**
-	 * @return the monitorResultTable
-	 */
-	public JTable getMonitorResultTable() {
-		return monitorResultTable;
-	}
-
-	/**
-	 * @return the editHostButton
-	 */
-	public JButton getEditHostButton() {
-		return editHostButton;
-	}
-
-	/**
-	 * @return the monitoredHostList
-	 */
-	public JList getMonitoredHostList() {
-		return monitoredHostList;
-	}
-
-	/**
-	 * @return the resultTableRefreshTimer
-	 */
-	public Timer getResultTableRefreshTimer() {
-		return resultTableRefreshTimer;
-	}
-
-	/**
-	 * @return the monitorResultTableModel
-	 */
-	public MonitorResultTableModel getMonitorResultTableModel() {
-		return monitorResultTableModel;
-	}
-
-	/**
-	 * @return the targetHostListModel
-	 */
-	public DefaultListModel getTargetHostListModel() {
-		return targetHostListModel;
-	}
-
-	/**
-	 * @return the monitorTargets
-	 */
-	public List<MonitorTarget> getMonitorTargets() {
-		return monitorTargets;
-	}
-
 	public void refreshHostList() {
 		targetHostListModel.removeAllElements();
 		for (final MonitorTarget target : this.monitorTargets) {
@@ -223,6 +159,35 @@ public class HttpMonitorAppForm implements Serializable {
 	}
 
 	/**
+	 * Gets the value of serialversionuid.
+	 * 
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	/**
+	 * Gets the value of addHostButton.
+	 * 
+	 * @return the addHostButton
+	 */
+	public JButton getAddHostButton() {
+		return addHostButton;
+	}
+
+	/**
+	 * Gets the value of removeHostButton.
+	 * 
+	 * @return the removeHostButton
+	 */
+	public JButton getRemoveHostButton() {
+		return removeHostButton;
+	}
+
+	/**
+	 * Gets the value of clearResultButton.
+	 * 
 	 * @return the clearResultButton
 	 */
 	public JButton getClearResultButton() {
@@ -230,6 +195,89 @@ public class HttpMonitorAppForm implements Serializable {
 	}
 
 	/**
+	 * Gets the value of editHostButton.
+	 * 
+	 * @return the editHostButton
+	 */
+	public JButton getEditHostButton() {
+		return editHostButton;
+	}
+
+	/**
+	 * Gets the value of monitorResultTable.
+	 * 
+	 * @return the monitorResultTable
+	 */
+	public JTable getMonitorResultTable() {
+		return monitorResultTable;
+	}
+
+	/**
+	 * Gets the value of monitorResultTableModel.
+	 * 
+	 * @return the monitorResultTableModel
+	 */
+	public MonitorResultTableModel getMonitorResultTableModel() {
+		return monitorResultTableModel;
+	}
+
+	/**
+	 * Gets the value of monitoredHostList.
+	 * 
+	 * @return the monitoredHostList
+	 */
+	public JList getMonitoredHostList() {
+		return monitoredHostList;
+	}
+
+	/**
+	 * Gets the value of startMonitorButton.
+	 * 
+	 * @return the startMonitorButton
+	 */
+	public JButton getStartMonitorButton() {
+		return startMonitorButton;
+	}
+
+	/**
+	 * Gets the value of stopMonitorButton.
+	 * 
+	 * @return the stopMonitorButton
+	 */
+	public JButton getStopMonitorButton() {
+		return stopMonitorButton;
+	}
+
+	/**
+	 * Gets the value of resultTableRefreshTimer.
+	 * 
+	 * @return the resultTableRefreshTimer
+	 */
+	public Timer getResultTableRefreshTimer() {
+		return resultTableRefreshTimer;
+	}
+
+	/**
+	 * Gets the value of monitorTargets.
+	 * 
+	 * @return the monitorTargets
+	 */
+	public List<MonitorTarget> getMonitorTargets() {
+		return monitorTargets;
+	}
+
+	/**
+	 * Gets the value of targetHostListModel.
+	 * 
+	 * @return the targetHostListModel
+	 */
+	public DefaultListModel getTargetHostListModel() {
+		return targetHostListModel;
+	}
+
+	/**
+	 * Gets the value of menuBar.
+	 * 
 	 * @return the menuBar
 	 */
 	public JMenuBar getMenuBar() {

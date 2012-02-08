@@ -14,7 +14,7 @@ public class TargetHostListModel extends AbstractListModel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private volatile List<MonitorTarget> monitorTargets;
+	protected volatile List<MonitorTarget> monitorTargets;
 
 	public TargetHostListModel() {
 		monitorTargets = new ArrayList<MonitorTarget>();

@@ -30,6 +30,12 @@ public class ClearMonitorResultsActionListenerImpl implements ActionListener {
 
 	}
 
+	/**
+	 * Clears the monitor result.
+	 * 
+	 * @see MonitorResultSummarizer
+	 * @see HttpMonitorAppForm
+	 */
 	@Override
 	public void actionPerformed(final ActionEvent e) {
 		LOG.debug("getting instance for summarizer");
