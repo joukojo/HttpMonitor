@@ -25,6 +25,7 @@ import com.yogocodes.httpmonitor.gui.listeners.AddNewHostActionListenerImpl;
 import com.yogocodes.httpmonitor.gui.listeners.ClearMonitorResultsActionListenerImpl;
 import com.yogocodes.httpmonitor.gui.listeners.EditHostActionListener;
 import com.yogocodes.httpmonitor.gui.listeners.EnableDisableButtonActionListenerImpl;
+import com.yogocodes.httpmonitor.gui.listeners.EnableDisableMenuItemListener;
 import com.yogocodes.httpmonitor.gui.listeners.RemoveHostActionListener;
 import com.yogocodes.httpmonitor.gui.listeners.ResultTableRefreshActionListenerImpl;
 import com.yogocodes.httpmonitor.gui.listeners.StartMonitoringActionListenerImpl;
@@ -124,11 +125,19 @@ public class HttpMonitorAppForm implements Serializable {
 
 		final JMenu monitorMenu = new JMenu("Monitor");
 		final JMenuItem monitorStartItem = new JMenuItem("Start");
+		final JMenuItem monitorEndItem = new JMenuItem("Stop");
+		monitorStartItem.setEnabled(true);
 		monitorStartItem.addActionListener(new StartMonitoringActionListenerImpl());
 		monitorStartItem.addActionListener(buttonListener);
-		final JMenuItem monitorEndItem = new JMenuItem("Stop");
+
+		final EnableDisableMenuItemListener menuItemListener = new EnableDisableMenuItemListener(monitorStartItem, monitorEndItem);
+		monitorStartItem.addActionListener(menuItemListener);
 		monitorEndItem.addActionListener(new StopMonitoringActionListenerImpl());
+		monitorEndItem.setEnabled(false);
+		this.startMonitorButton.addActionListener(menuItemListener);
+		this.stopMonitorButton.addActionListener(menuItemListener);
 		monitorEndItem.addActionListener(buttonListener);
+		monitorEndItem.addActionListener(menuItemListener);
 		monitorMenu.add(monitorStartItem);
 		monitorMenu.add(monitorEndItem);
 		final JMenu helpMenu = new JMenu("Help");
@@ -139,9 +148,6 @@ public class HttpMonitorAppForm implements Serializable {
 		getMenuBar().add(fileMenu);
 		getMenuBar().add(monitorMenu);
 		getMenuBar().add(helpMenu);
-
-		// setJMenuBar(menuBar);
-
 	}
 
 	/**

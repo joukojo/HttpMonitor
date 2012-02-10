@@ -71,7 +71,7 @@ public class HttpMonitorEngineWorker implements Runnable {
 			}
 
 			try {
-				if (target.getSleepPeriod() != 0l) {
+				if (target.getSleepPeriod() != null && target.getSleepPeriod() != 0l) {
 					Thread.sleep(target.getSleepPeriod());
 				} else {
 					Thread.sleep(1000l);
