@@ -21,7 +21,7 @@ public class HttpMonitorEngine {
 	/**
 	 * Engine's targets
 	 */
-	private final List<MonitorTarget> targets;
+	protected final List<MonitorTarget> targets;
 
 	/**
 	 * The flag for indicating if the engine is running or not.
@@ -61,26 +61,40 @@ public class HttpMonitorEngine {
 		if (!isRunning) {
 			LOG.debug("starting the monitor engine");
 			isRunning = true;
-			LOG.debug("creating thread pool {} threads", getTargets().size());
-			executorService = Executors.newFixedThreadPool(getTargets().size());
+			final int numberOfRequestedThreads = getTargets().size();
+			initThreadPool(numberOfRequestedThreads);
 			LOG.debug("storing the startup time");
 			final SystemPropertyContainer containerInstance = SystemPropertyContainerFactory.getContainerInstance();
 			containerInstance.setExecutionStartTime(System.currentTimeMillis());
-			final List<HttpMonitorEngineWorker> workers = new ArrayList<HttpMonitorEngineWorker>();
-			LOG.debug("creating workers for targets");
-			for (final MonitorTarget target : getTargets()) {
-				final HttpMonitorEngineWorker worker = new HttpMonitorEngineWorker();
-				worker.setValues(target);
-				workers.add(worker);
-			}
+			final List<HttpMonitorEngineWorker> workers = createWorkers();
 
-			LOG.debug("exeuting workers");
-			for (final HttpMonitorEngineWorker worker : workers) {
-				executorService.execute(worker);
-			}
-			LOG.debug("exeuted workers");
+			startTheWorkers(workers);
 		}
 
+	}
+
+	protected void startTheWorkers(final List<HttpMonitorEngineWorker> workers) {
+		LOG.debug("exeuting workers");
+		for (final HttpMonitorEngineWorker worker : workers) {
+			getExecutorService().execute(worker);
+		}
+		LOG.debug("exeuted workers");
+	}
+
+	protected List<HttpMonitorEngineWorker> createWorkers() {
+		final List<HttpMonitorEngineWorker> workers = new ArrayList<HttpMonitorEngineWorker>();
+		LOG.debug("creating workers for targets");
+		for (final MonitorTarget target : getTargets()) {
+			final HttpMonitorEngineWorker worker = new HttpMonitorEngineWorker();
+			worker.setValues(target);
+			workers.add(worker);
+		}
+		return workers;
+	}
+
+	protected void initThreadPool(final int numberOfRequestedThreads) {
+		LOG.debug("creating thread pool {} threads", numberOfRequestedThreads);
+		setExecutorService(Executors.newFixedThreadPool(numberOfRequestedThreads));
 	}
 
 	/**
@@ -109,6 +123,20 @@ public class HttpMonitorEngine {
 	 */
 	public void setRunning(final boolean isRunning) {
 		this.isRunning = isRunning;
+	}
+
+	/**
+	 * @return the executorService
+	 */
+	public ExecutorService getExecutorService() {
+		return executorService;
+	}
+
+	/**
+	 * @param executorService the executorService to set
+	 */
+	public void setExecutorService(ExecutorService executorService) {
+		this.executorService = executorService;
 	}
 
 }

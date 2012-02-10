@@ -18,7 +18,13 @@ public class MonitorResultSummarizerFactory {
 	 */
 	public static MonitorResultSummarizer getInstance() {
 		if (summarizerInstance == null) {
-			summarizerInstance = new MonitorResultSummarizer();
+
+			synchronized (MonitorResultSummarizerFactory.class) {
+				if (summarizerInstance == null) {
+					summarizerInstance = new MonitorResultSummarizer();
+				}
+			}
+
 		}
 		return summarizerInstance;
 	}

@@ -4,11 +4,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import com.yogocodes.httpmonitor.core.MonitorTarget;
 import com.yogocodes.httpmonitor.gui.form.HttpMonitorAppForm;
 import com.yogocodes.httpmonitor.gui.form.HttpMonitorAppFormFactory;
 import com.yogocodes.httpmonitor.gui.form.MonitorTargetForm;
 import com.yogocodes.httpmonitor.gui.form.MonitorTargetFormFactory;
+import com.yogocodes.httpmonitor.gui.frames.HttpMonitorAppFrame;
+import com.yogocodes.httpmonitor.gui.frames.HttpMonitorAppFrameFactory;
 import com.yogocodes.httpmonitor.gui.frames.ModifyTargetFrame;
 import com.yogocodes.httpmonitor.gui.frames.ModifyTargetFrameFactory;
 
@@ -18,6 +22,8 @@ public class EditHostActionListener implements ActionListener {
 	public void actionPerformed(final ActionEvent e) {
 		final HttpMonitorAppForm formInstance = HttpMonitorAppFormFactory.getAppFormInstance();
 		final MonitorTargetForm targetFormInstance = MonitorTargetFormFactory.getMonitorTargetFormInstance();
+		final HttpMonitorAppFrame appFrame = HttpMonitorAppFrameFactory.getAppFrameInstance();
+
 		final int selectedIndex = formInstance.getMonitoredHostList().getSelectedIndex();
 
 		if (selectedIndex != -1) {
@@ -27,11 +33,14 @@ public class EditHostActionListener implements ActionListener {
 				targetFormInstance.setValues(target);
 
 				final ModifyTargetFrame frameInstance = ModifyTargetFrameFactory.getFrameInstance();
+
+				frameInstance.setLocationRelativeTo(appFrame);
 				frameInstance.setEnabled(true);
 				frameInstance.setVisible(true);
 			}
+		} else {
+			JOptionPane.showMessageDialog(null, "Please select target to edit", "Warning", JOptionPane.WARNING_MESSAGE);
 		}
 
 	}
-
 }

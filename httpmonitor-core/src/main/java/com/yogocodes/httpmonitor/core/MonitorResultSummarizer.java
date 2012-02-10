@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class MonitorResultSummarizer {
 
-	private final Map<String, MonitorResultSummary> resultSummaries;
+	protected final Map<String, MonitorResultSummary> resultSummaries;
 
 	/**
 	 * Default constructor

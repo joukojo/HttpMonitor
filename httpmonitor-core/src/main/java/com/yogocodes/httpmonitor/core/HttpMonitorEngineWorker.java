@@ -22,7 +22,8 @@ import org.slf4j.LoggerFactory;
 public class HttpMonitorEngineWorker implements Runnable {
 
 	private final static Logger LOG = LoggerFactory.getLogger(HttpMonitorEngineWorker.class);
-	private MonitorTarget target;
+	protected MonitorTarget target;
+	private HttpClient httpClient;
 
 	/**
 	 * The run method for the worker.
@@ -34,13 +35,12 @@ public class HttpMonitorEngineWorker implements Runnable {
 	 */
 	@Override
 	public void run() {
-		final HttpMonitorEngine engineInstance = HttpMonitorEngineFactory.getEngineInstance();
 
-		final HttpClient httpClient = new HttpClient();
+		final HttpClient httpClient = getHttpClient();
 		final MonitorResultSummarizer summarizer = MonitorResultSummarizerFactory.getInstance();
 
-		final MonitorLogWriter writer = new MonitorLogWriter();
-		while (engineInstance.isRunning()) {
+		final MonitorLogWriter writer = createWriter();
+		while (isRunning()) {
 
 			final HttpMethod method = createMethod(target);
 
@@ -71,7 +71,12 @@ public class HttpMonitorEngineWorker implements Runnable {
 			}
 
 			try {
-				Thread.sleep(1000);
+				if (target.getSleepPeriod() != 0l) {
+					Thread.sleep(target.getSleepPeriod());
+				} else {
+					Thread.sleep(1000l);
+				}
+
 			} catch (final InterruptedException e) {
 				LOG.error("the thread sleep was interrupted, interruptting current one", e);
 				Thread.currentThread().interrupt();
@@ -79,6 +84,28 @@ public class HttpMonitorEngineWorker implements Runnable {
 
 		}
 
+	}
+
+	protected MonitorLogWriter createWriter() {
+		final MonitorLogWriter writer = new MonitorLogWriter();
+		return writer;
+	}
+
+	protected boolean isRunning() {
+		final HttpMonitorEngine engineInstance = HttpMonitorEngineFactory.getEngineInstance();
+		return engineInstance.isRunning();
+	}
+
+	protected HttpClient getHttpClient() {
+		if (httpClient == null) {
+			synchronized (HttpMonitorEngineWorker.class) {
+				if (httpClient == null) {
+					httpClient = new HttpClient();
+				}
+			}
+		}
+
+		return httpClient;
 	}
 
 	/**

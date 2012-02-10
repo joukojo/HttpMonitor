@@ -1,5 +1,7 @@
 package com.yogocodes.httpmonitor.core;
 
+import java.util.Map;
+
 public class MonitorTarget {
 
 	private String method;
@@ -7,6 +9,9 @@ public class MonitorTarget {
 	private String host;
 	private int port;
 	private String path;
+
+	private Map<String, String> headers;
+	private Long sleepPeriod;
 
 	public String getMethod() {
 		return method;
@@ -51,6 +56,34 @@ public class MonitorTarget {
 	@Override
 	public String toString() {
 		return protocol + "://" + this.host + ":" + port + "/" + path;
+	}
+
+	/**
+	 * @return the headers
+	 */
+	public Map<String, String> getHeaders() {
+		return headers;
+	}
+
+	/**
+	 * @param headers the headers to set
+	 */
+	public void setHeaders(Map<String, String> headers) {
+		this.headers = headers;
+	}
+
+	/**
+	 * @return the sleepPeriod
+	 */
+	public Long getSleepPeriod() {
+		return sleepPeriod;
+	}
+
+	/**
+	 * @param sleepPeriod the sleepPeriod to set
+	 */
+	public void setSleepPeriod(Long sleepPeriod) {
+		this.sleepPeriod = sleepPeriod;
 	}
 
 }

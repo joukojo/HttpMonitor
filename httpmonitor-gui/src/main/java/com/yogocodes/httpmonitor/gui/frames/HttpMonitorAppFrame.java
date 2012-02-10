@@ -49,6 +49,7 @@ public class HttpMonitorAppFrame extends JFrame {
 		getContentPane().add(resultPane, BorderLayout.CENTER);
 		getContentPane().add(executionButtonPanel, BorderLayout.SOUTH);
 		setJMenuBar(appForm.getMenuBar());
+		setLocationRelativeTo(null);
 		setVisible(true);
 		setEnabled(true);
 	}
