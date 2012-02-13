@@ -66,9 +66,10 @@ public class MonitorTarget {
 	}
 
 	/**
-	 * @param headers the headers to set
+	 * @param headers
+	 *            the headers to set
 	 */
-	public void setHeaders(Map<String, String> headers) {
+	public void setHeaders(final Map<String, String> headers) {
 		this.headers = headers;
 	}
 
@@ -80,9 +81,10 @@ public class MonitorTarget {
 	}
 
 	/**
-	 * @param sleepPeriod the sleepPeriod to set
+	 * @param sleepPeriod
+	 *            the sleepPeriod to set
 	 */
-	public void setSleepPeriod(Long sleepPeriod) {
+	public void setSleepPeriod(final Long sleepPeriod) {
 		this.sleepPeriod = sleepPeriod;
 	}
 
