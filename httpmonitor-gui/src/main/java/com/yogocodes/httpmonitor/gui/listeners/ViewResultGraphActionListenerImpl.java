@@ -21,7 +21,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
-import com.yogocodes.httpm*onitor.core.MonitorResult;
+import com.yogocodes.httpmonitor.core.MonitorResult;
 import com.yogocodes.httpmonitor.core.SystemPropertyContainer;
 import com.yogocodes.httpmonitor.core.SystemPropertyContainerFactory;
 
