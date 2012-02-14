@@ -65,9 +65,9 @@ public class HttpMonitorEngineWorker implements Runnable {
 				writer.writeCSVLog(result);
 
 			} catch (final HttpException e) {
-				LOG.error("failed to create request to target:" + e.getMessage(), e);
+				LOG.error("failed to create request to target: '{}'" + e.getMessage(), target);
 			} catch (final IOException e) {
-				LOG.error("failed to create request to target:" + e.getMessage(), e);
+				LOG.error("failed to create request to target: '{}'" + e.getMessage(), target);
 			}
 
 			try {

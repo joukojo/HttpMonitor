@@ -19,13 +19,6 @@ import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.Timer;
 
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartFrame;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
-
 import com.yogocodes.httpmonitor.core.MonitorTarget;
 import com.yogocodes.httpmonitor.gui.listeners.AboutMenuActionListener;
 import com.yogocodes.httpmonitor.gui.listeners.AddNewHostActionListenerImpl;
@@ -39,6 +32,7 @@ import com.yogocodes.httpmonitor.gui.listeners.ResultTableRefreshActionListenerI
 import com.yogocodes.httpmonitor.gui.listeners.SaveConfigurationActionListenerImpl;
 import com.yogocodes.httpmonitor.gui.listeners.StartMonitoringActionListenerImpl;
 import com.yogocodes.httpmonitor.gui.listeners.StopMonitoringActionListenerImpl;
+import com.yogocodes.httpmonitor.gui.listeners.ViewResultGraphActionListenerImpl;
 
 /**
  * Application main form object which is used as a value container. For creating
@@ -159,34 +153,7 @@ public class HttpMonitorAppForm implements Serializable {
 		aboutMenutItem.addActionListener(new AboutMenuActionListener());
 		final JMenu viewGraphMenu = new JMenu("Graph");
 		final JMenuItem viewItem = new JMenuItem("View");
-		viewItem.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(final ActionEvent e) {
-				final XYSeries series = new XYSeries("Response times");
-				series.add(20.0, 20.0);
-				series.add(40.0, 25.0);
-				series.add(55.0, 50.0);
-				series.add(70.0, 65.0);
-
-				final XYSeries series2 = new XYSeries("Response times2");
-				series2.add(20.0, 30.0);
-				series2.add(40.0, 35.0);
-				series2.add(55.0, 70.0);
-				series2.add(70.0, 85.0);
-
-				final XYSeriesCollection xyDataset = new XYSeriesCollection(series);
-				xyDataset.addSeries(series2);
-
-				final JFreeChart chart = ChartFactory.createXYLineChart("Response times", "Time", "Response time(ms)", xyDataset, PlotOrientation.VERTICAL, true, true, false);
-
-				final ChartFrame frame1 = new ChartFrame("Performance charts", chart);
-
-				frame1.setSize(500, 500);
-				frame1.setLocationRelativeTo(null);
-				frame1.setVisible(true);
-			}
-		});
+		viewItem.addActionListener(new ViewResultGraphActionListenerImpl());
 
 		viewGraphMenu.add(viewItem);
 		helpMenu.add(aboutMenutItem);

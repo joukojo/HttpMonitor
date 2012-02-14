@@ -1,7 +1,9 @@
 package com.yogocodes.httpmonitor.core;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.StringTokenizer;
 
 /**
  * Result container.
@@ -40,6 +42,39 @@ public class MonitorResult {
 		builder.append(System.getProperty("line.separator"));
 
 		return builder.toString();
+	}
+
+	public static MonitorResult fromCSVLine(final String line) throws ParseException {
+
+		final MonitorResult result = new MonitorResult();
+		final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+
+		final StringTokenizer tokenizer = new StringTokenizer(line, ",");
+		int inx = 0;
+		while (tokenizer.hasMoreTokens()) {
+			final String token = tokenizer.nextToken();
+			switch (inx++) {
+			case 0:
+				final Date date = dateFormat.parse(token);
+				result.setExecuteTime(date.getTime());
+				break;
+			case 1:
+				result.setUrl(token);
+				break;
+			case 2:
+				result.setStatusCode(Integer.valueOf(token));
+				break;
+			case 3:
+				result.setTime(Long.valueOf(token));
+				break;
+			case 4:
+				result.setNumberOfBytes(Integer.valueOf(token));
+				break;
+
+			}
+		}
+
+		return result;
 	}
 
 	/**
