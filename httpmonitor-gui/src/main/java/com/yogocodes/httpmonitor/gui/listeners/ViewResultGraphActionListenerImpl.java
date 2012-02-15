@@ -14,6 +14,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
@@ -67,8 +69,7 @@ public class ViewResultGraphActionListenerImpl implements ActionListener {
 			frame1.setVisible(true);
 
 		} catch (final FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Before viewing results, you should start the monitoring", "error", JOptionPane.ERROR_MESSAGE);
 		} catch (final IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

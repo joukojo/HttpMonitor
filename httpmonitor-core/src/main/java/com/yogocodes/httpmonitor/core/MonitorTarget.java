@@ -11,7 +11,7 @@ public class MonitorTarget {
 	private String path;
 
 	private Map<String, String> headers;
-	private Long sleepPeriod;
+	private Long sleepPeriod = 1000l;
 
 	public String getMethod() {
 		return method;

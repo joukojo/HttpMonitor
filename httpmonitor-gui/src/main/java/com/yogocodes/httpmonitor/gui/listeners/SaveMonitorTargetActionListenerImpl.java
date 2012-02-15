@@ -30,7 +30,7 @@ public class SaveMonitorTargetActionListenerImpl implements ActionListener {
 		target.setPath(monitorTargetForm.getPathTextField().getText());
 		target.setPort(Integer.valueOf(monitorTargetForm.getPortTextField().getText()));
 		target.setProtocol(monitorTargetForm.getProtocolList().getSelectedItem().toString());
-
+		target.setSleepPeriod(Long.valueOf(monitorTargetForm.getDelaySlider().getValue()));
 		monitorTargetForm.clear();
 		final HttpMonitorAppForm appFormInstance = HttpMonitorAppFormFactory.getAppFormInstance();
 

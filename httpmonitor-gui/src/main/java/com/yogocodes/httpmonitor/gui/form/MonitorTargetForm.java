@@ -3,6 +3,7 @@ package com.yogocodes.httpmonitor.gui.form;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JSlider;
 import javax.swing.JTextField;
 
 import com.yogocodes.httpmonitor.core.MonitorTarget;
@@ -25,6 +26,7 @@ public class MonitorTargetForm {
 
 	private final JButton saveButton;
 	private final JButton cancelButton;
+	private final JSlider delaySlider;
 
 	protected MonitorTargetForm() {
 		protocolLabel = new JLabel("protocol:");
@@ -46,6 +48,7 @@ public class MonitorTargetForm {
 
 		cancelButton = new JButton("cancel");
 		cancelButton.addActionListener(new CancelMonitorTargetActionListenerImpl(this));
+		delaySlider = new JSlider(100, 15000);
 	}
 
 	public void clear() {
@@ -111,12 +114,42 @@ public class MonitorTargetForm {
 	}
 
 	public void setValues(final MonitorTarget target) {
-		// FIXME handle method adn protocol
-		target.getMethod();
+		final int methodItemCount = methodList.getItemCount();
+
+		for (int i = 0; i < methodItemCount; i++) {
+			final String method = (String) methodList.getItemAt(i);
+
+			if (method.equalsIgnoreCase(target.getMethod())) {
+				methodList.setSelectedIndex(i);
+				break;
+			}
+		}
+
+		final int protocolItemCount = protocolList.getItemCount();
+
+		for (int i = 0; i < protocolItemCount; i++) {
+			final String protocol = (String) protocolList.getItemAt(i);
+
+			if (protocol.equalsIgnoreCase(target.getProtocol())) {
+				protocolList.setSelectedIndex(i);
+				break;
+			}
+		}
+
 		target.getProtocol();
 		this.serverTextField.setText(target.getHost());
 		this.portTextField.setText("" + target.getPort());
 		this.pathTextField.setText(target.getPath());
+		this.delaySlider.setValue(target.getSleepPeriod().intValue());
+	}
+
+	/**
+	 * Gets the value of delaySlider.
+	 * 
+	 * @return the delaySlider
+	 */
+	public JSlider getDelaySlider() {
+		return delaySlider;
 	}
 
 }
