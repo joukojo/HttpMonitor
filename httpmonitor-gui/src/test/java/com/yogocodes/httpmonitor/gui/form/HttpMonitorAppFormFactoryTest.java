@@ -3,6 +3,7 @@
  */
 package com.yogocodes.httpmonitor.gui.form;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -23,4 +24,9 @@ public class HttpMonitorAppFormFactoryTest {
 
 	}
 
+	@Override
+	public String toString() {
+		final ToStringBuilder builder = new ToStringBuilder(this);
+		return builder.toString();
+	}
 }

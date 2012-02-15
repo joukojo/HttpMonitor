@@ -13,44 +13,55 @@ import org.slf4j.LoggerFactory;
 import com.yogocodes.httpmonitor.gui.frames.HttpMonitorAppFrameFactory;
 
 /**
- *  HttpMonitor application which is used to start the gui interface.
+ * HttpMonitor application which is used to start the gui interface.
  * 
  * @author joukojo
- *
+ * 
  */
 public class HttpMonitorApp {
 
-	private final static Logger LOG = LoggerFactory.getLogger(HttpMonitorApp.class); 
-	
+	private final static Logger LOG = LoggerFactory.getLogger(HttpMonitorApp.class);
+
 	/**
 	 * Main method
-	 * @param args cli arguments
+	 * 
+	 * @param args
+	 *            cli arguments
 	 */
-	public static void main(String[] args) {
-		
+	public static void main(final String[] args) {
+
 		SwingUtilities.invokeLater(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				try {
 					UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-					
+
 					HttpMonitorAppFrameFactory.getAppFrameInstance();
-					
-				} catch (ClassNotFoundException e) {
-					LOG.error("failed to locate class:" + e.getMessage(), e); 
-				} catch (InstantiationException e) {
-					LOG.error("failed to instantiate class"+ e.getMessage(), e); 
-				} catch (IllegalAccessException e) {
+
+				} catch (final ClassNotFoundException e) {
+					LOG.error("failed to locate class:" + e.getMessage(), e);
+				} catch (final InstantiationException e) {
+					LOG.error("failed to instantiate class" + e.getMessage(), e);
+				} catch (final IllegalAccessException e) {
 					LOG.error("Illegal access exception", e);
-				} catch (UnsupportedLookAndFeelException e) {
-					LOG.error("unsupported look and feel", e); 
+				} catch (final UnsupportedLookAndFeelException e) {
+					LOG.error("unsupported look and feel", e);
 				}
 
-				
 			}
 		});
 
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "";
 	}
 
 }

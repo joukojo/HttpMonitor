@@ -6,6 +6,8 @@ import java.util.List;
 import javax.swing.JList;
 import javax.swing.table.AbstractTableModel;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import com.yogocodes.httpmonitor.core.MonitorResultSummary;
 
 /**
@@ -22,7 +24,7 @@ public class MonitorResultTableModel extends AbstractTableModel {
 	 * serial uid.
 	 */
 	private static final long serialVersionUID = 1L;
-	private volatile List<MonitorResultSummary> results;
+	private final List<MonitorResultSummary> results;
 	private final String[] header = { "url", "count", "delay", "average", "min", "max" };
 
 	/**
@@ -68,8 +70,9 @@ public class MonitorResultTableModel extends AbstractTableModel {
 			return result.getMinTime();
 		case 5:
 			return result.getMaxTime();
+		default:
+			return -1;
 		}
-		return -1;
 	}
 
 	public void clearData() {
@@ -82,6 +85,19 @@ public class MonitorResultTableModel extends AbstractTableModel {
 	 */
 	public List<MonitorResultSummary> getResults() {
 		return results;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		final ToStringBuilder builder = new ToStringBuilder(this);
+		builder.append("results", results);
+
+		return builder.toString();
 	}
 
 }

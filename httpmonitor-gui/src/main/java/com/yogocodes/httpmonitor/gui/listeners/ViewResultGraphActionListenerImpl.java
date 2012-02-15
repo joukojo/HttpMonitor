@@ -16,6 +16,7 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
@@ -71,32 +72,72 @@ public class ViewResultGraphActionListenerImpl implements ActionListener {
 		} catch (final FileNotFoundException e1) {
 			JOptionPane.showMessageDialog(null, "Before viewing results, you should start the monitoring", "error", JOptionPane.ERROR_MESSAGE);
 		} catch (final IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (final ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Reading of result file failed:" + e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		}
-
 	}
 
-	protected Map<String, XYSeries> readCSVFile(final String logFileName) throws FileNotFoundException, IOException, ParseException {
-		final FileReader fileReader = new FileReader(logFileName);
+	protected Map<String, XYSeries> readCSVFile(final String logFileName) throws FileNotFoundException, IOException {
 
-		final BufferedReader reader = new BufferedReader(fileReader);
-		String line = reader.readLine();
-		final Map<String, XYSeries> dataSeries = new HashMap<String, XYSeries>();
-		while (line != null) {
-			final MonitorResult result = MonitorResult.fromCSVLine(line);
-			final String url = result.getUrl();
-			if (!dataSeries.containsKey(url)) {
+		FileReader fileReader = null;
+		Map<String, XYSeries> dataSeries = null;
+		try {
 
-				dataSeries.put(url, new XYSeries(url));
+			fileReader = new FileReader(logFileName);
+
+			dataSeries = readCSVFile(fileReader);
+		} finally {
+			if (null != fileReader) {
+				fileReader.close();
 			}
-			dataSeries.get(url).add(result.getExecuteTime(), result.getTime());
-
-			line = reader.readLine();
 		}
 		return dataSeries;
+	}
+
+	/**
+	 * @param fileReader
+	 * @return
+	 */
+	private Map<String, XYSeries> readCSVFile(final FileReader fileReader) {
+		final Map<String, XYSeries> dataSeries = new HashMap<String, XYSeries>();
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(fileReader);
+			String line = reader.readLine();
+
+			while (null != line) {
+				final MonitorResult result = MonitorResult.fromCSVLine(line);
+				final String url = result.getUrl();
+				if (!dataSeries.containsKey(url)) {
+
+					dataSeries.put(url, new XYSeries(url));
+				}
+				dataSeries.get(url).add(result.getExecuteTime(), result.getTime());
+
+				line = reader.readLine();
+
+			}
+		} catch (final IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (final ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (null != reader) {
+				try {
+					reader.close();
+				} catch (final IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return dataSeries;
+	}
+
+	@Override
+	public String toString() {
+		final ToStringBuilder builder = new ToStringBuilder(this);
+		return builder.toString();
 	}
 }

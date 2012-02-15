@@ -7,6 +7,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import junit.framework.Assert;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.junit.Test;
 
 import com.yogocodes.httpmonitor.core.MonitorResultSummary;
@@ -127,10 +128,10 @@ public class MonitorResultTableModelTest {
 	private MonitorResultSummary createResultSummary() {
 		final MonitorResultSummary summary = new MonitorResultSummary();
 		final String expectedHost = "http://junit.localhost.com/junit/junit.html";
-		final Long actualMaxTime = 4321l;
+		final Long actualMaxTime = 4321L;
 		final Long actualMinTime = 1l;
 		final Integer actualNumberOfRequests = 12345;
-		final Long actualTime = 432l;
+		final Long actualTime = 432L;
 		final Integer actualTotalTime = 4 * 432;
 
 		summary.setHost(expectedHost);
@@ -174,5 +175,11 @@ public class MonitorResultTableModelTest {
 		final MonitorResultTableModel tableModel = new MonitorResultTableModel();
 
 		Assert.assertNotNull("results are null", tableModel);
+	}
+
+	@Override
+	public String toString() {
+		final ToStringBuilder builder = new ToStringBuilder(this);
+		return builder.toString();
 	}
 }

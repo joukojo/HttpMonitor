@@ -1,5 +1,7 @@
 package com.yogocodes.httpmonitor.gui.form;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * MonitorTargetForm singleton factory.
  * 
@@ -17,15 +19,27 @@ public class MonitorTargetFormFactory {
 	 */
 	public static MonitorTargetForm getMonitorTargetFormInstance() {
 
-		if (monitorTargetFormInstance == null) {
+		if (null == monitorTargetFormInstance) {
 			synchronized (MonitorTargetFormFactory.class) {
-				if (monitorTargetFormInstance == null) {
+				if (null == monitorTargetFormInstance) {
 					monitorTargetFormInstance = new MonitorTargetForm();
 				}
 			}
 		}
 
 		return monitorTargetFormInstance;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		final ToStringBuilder builder = new ToStringBuilder(this);
+		builder.append("monitorTargetFormInstance", monitorTargetFormInstance);
+		return builder.toString();
 	}
 
 }

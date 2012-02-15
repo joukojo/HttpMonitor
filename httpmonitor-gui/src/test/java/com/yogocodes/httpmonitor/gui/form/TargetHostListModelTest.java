@@ -6,6 +6,7 @@ package com.yogocodes.httpmonitor.gui.form;
 import static org.junit.Assert.assertNotNull;
 import junit.framework.Assert;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.junit.Test;
 
 import com.yogocodes.httpmonitor.core.MonitorTarget;
@@ -84,4 +85,9 @@ public class TargetHostListModelTest {
 
 	}
 
+	@Override
+	public String toString() {
+		final ToStringBuilder builder = new ToStringBuilder(this);
+		return builder.toString();
+	}
 }

@@ -1,5 +1,7 @@
 package com.yogocodes.httpmonitor.gui.form;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * Http Monitor form factory class
  * 
@@ -12,22 +14,15 @@ public class HttpMonitorAppFormFactory {
 	private static HttpMonitorAppForm appFormInstance;
 
 	/**
-	 * use the {@link #getAppFormInstance()} to create instance.
-	 */
-	private HttpMonitorAppFormFactory() {
-
-	}
-
-	/**
 	 * Gets the shared application form instance. The method is thread safe.
 	 * 
 	 * @return shared form instance.
 	 */
 	public static HttpMonitorAppForm getAppFormInstance() {
 
-		if (appFormInstance == null) {
+		if (null == appFormInstance) {
 			synchronized (HttpMonitorAppFormFactory.class) {
-				if (appFormInstance == null) {
+				if (null == appFormInstance) {
 					appFormInstance = new HttpMonitorAppForm();
 
 				}
@@ -35,6 +30,12 @@ public class HttpMonitorAppFormFactory {
 		}
 
 		return appFormInstance;
+	}
+
+	@Override
+	public String toString() {
+		final ToStringBuilder builder = new ToStringBuilder(this);
+		return builder.toString();
 	}
 
 }

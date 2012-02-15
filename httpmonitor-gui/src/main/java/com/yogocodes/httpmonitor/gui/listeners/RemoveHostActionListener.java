@@ -3,6 +3,7 @@ package com.yogocodes.httpmonitor.gui.listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,4 +32,9 @@ public class RemoveHostActionListener implements ActionListener {
 		}
 	}
 
+	@Override
+	public String toString() {
+		final ToStringBuilder builder = new ToStringBuilder(this);
+		return builder.toString();
+	}
 }

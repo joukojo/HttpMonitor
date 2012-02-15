@@ -6,6 +6,8 @@ import javax.swing.JLabel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import com.yogocodes.httpmonitor.core.MonitorTarget;
 import com.yogocodes.httpmonitor.gui.listeners.CancelMonitorTargetActionListenerImpl;
 import com.yogocodes.httpmonitor.gui.listeners.SaveMonitorTargetActionListenerImpl;
@@ -35,8 +37,8 @@ public class MonitorTargetForm {
 		portLabel = new JLabel("port:");
 		pathLabel = new JLabel("path:");
 
-		final Object protocols[] = { "http", "https" };
-		final Object methods[] = { "GET", "DELETE", "POST", "HEAD" };
+		final Object[] protocols = { "http", "https" };
+		final Object[] methods = { "GET", "DELETE", "POST", "HEAD" };
 		protocolList = new JComboBox(protocols);
 		methodList = new JComboBox(methods);
 		serverTextField = new JTextField();
@@ -150,6 +152,18 @@ public class MonitorTargetForm {
 	 */
 	public JSlider getDelaySlider() {
 		return delaySlider;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		final ToStringBuilder builder = new ToStringBuilder(this);
+
+		return builder.toString();
 	}
 
 }

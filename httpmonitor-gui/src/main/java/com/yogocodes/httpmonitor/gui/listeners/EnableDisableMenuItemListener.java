@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JMenuItem;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * @author joukojo
  * 
@@ -38,4 +40,9 @@ public class EnableDisableMenuItemListener implements ActionListener {
 		this.monitorStartItem.setEnabled(!monitorStartItem.isEnabled());
 	}
 
+	@Override
+	public String toString() {
+		final ToStringBuilder builder = new ToStringBuilder(this);
+		return builder.toString();
+	}
 }

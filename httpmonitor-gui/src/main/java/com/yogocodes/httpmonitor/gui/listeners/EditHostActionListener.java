@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import com.yogocodes.httpmonitor.core.MonitorTarget;
 import com.yogocodes.httpmonitor.gui.form.HttpMonitorAppForm;
 import com.yogocodes.httpmonitor.gui.form.HttpMonitorAppFormFactory;
@@ -42,5 +44,11 @@ public class EditHostActionListener implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Please select target to edit", "Warning", JOptionPane.WARNING_MESSAGE);
 		}
 
+	}
+
+	@Override
+	public String toString() {
+		final ToStringBuilder builder = new ToStringBuilder(this);
+		return builder.toString();
 	}
 }

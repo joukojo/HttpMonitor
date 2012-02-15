@@ -19,6 +19,8 @@ import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.Timer;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import com.yogocodes.httpmonitor.core.MonitorTarget;
 import com.yogocodes.httpmonitor.gui.listeners.AboutMenuActionListener;
 import com.yogocodes.httpmonitor.gui.listeners.AddNewHostActionListenerImpl;
@@ -141,8 +143,8 @@ public class HttpMonitorAppForm implements Serializable {
 		monitorStartItem.addActionListener(menuItemListener);
 		monitorEndItem.addActionListener(new StopMonitoringActionListenerImpl());
 		monitorEndItem.setEnabled(false);
-		this.startMonitorButton.addActionListener(menuItemListener);
-		this.stopMonitorButton.addActionListener(menuItemListener);
+		startMonitorButton.addActionListener(menuItemListener);
+		stopMonitorButton.addActionListener(menuItemListener);
 		monitorEndItem.addActionListener(buttonListener);
 		monitorEndItem.addActionListener(menuItemListener);
 		monitorMenu.add(monitorStartItem);
@@ -172,7 +174,7 @@ public class HttpMonitorAppForm implements Serializable {
 	 */
 	public void refreshHostList() {
 		targetHostListModel.removeAllElements();
-		for (final MonitorTarget target : this.monitorTargets) {
+		for (final MonitorTarget target : monitorTargets) {
 			targetHostListModel.addElement(target.toString());
 		}
 
@@ -304,4 +306,31 @@ public class HttpMonitorAppForm implements Serializable {
 		return menuBar;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		final ToStringBuilder builder = new ToStringBuilder(this);
+
+		builder.append("addHostButton", addHostButton);
+		builder.append("removeHostButton", removeHostButton);
+		builder.append("clearResultButton", clearResultButton);
+		builder.append("editHostButton", editHostButton);
+		builder.append("monitorResultTable", monitorResultTable);
+		builder.append("monitorResultTableModel", monitorResultTableModel);
+		builder.append("monitoredHostList", monitoredHostList);
+		builder.append("startMonitorButton", startMonitorButton);
+		builder.append("stopMonitorButton", stopMonitorButton);
+		builder.append("resultTableRefreshTimer", resultTableRefreshTimer);
+		builder.append("monitorTargets", monitorTargets);
+
+		builder.append("targetHostListModel", targetHostListModel);
+
+		builder.append("menuBar", menuBar);
+
+		return builder.toString();
+	}
 }

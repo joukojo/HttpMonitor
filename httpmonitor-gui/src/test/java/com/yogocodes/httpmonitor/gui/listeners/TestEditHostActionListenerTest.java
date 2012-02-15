@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * @author joukojo
  * 
@@ -28,4 +30,9 @@ public class TestEditHostActionListenerTest {
 
 	}
 
+	@Override
+	public String toString() {
+		final ToStringBuilder builder = new ToStringBuilder(this);
+		return builder.toString();
+	}
 }

@@ -11,6 +11,10 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.yogocodes.httpmonitor.core.MonitorTargetConfig;
 import com.yogocodes.httpmonitor.gui.form.HttpMonitorAppForm;
 import com.yogocodes.httpmonitor.gui.form.HttpMonitorAppFormFactory;
@@ -22,11 +26,12 @@ import com.yogocodes.httpmonitor.gui.frames.HttpMonitorAppFrameFactory;
  */
 public class OpenConfigurationFileActionListenerImpl implements ActionListener {
 
-	/*
+	private final Logger LOG = LoggerFactory.getLogger(OpenConfigurationFileActionListenerImpl.class);
+
+	/**
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
 	public void actionPerformed(final ActionEvent e) {
@@ -67,10 +72,15 @@ public class OpenConfigurationFileActionListenerImpl implements ActionListener {
 				HttpMonitorAppFrameFactory.getAppFrameInstance().repaint();
 
 			} catch (final JAXBException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				LOG.error("Failed to read configuration file:" + e1.getMessage(), e1);
 			}
 		}
+	}
+
+	@Override
+	public String toString() {
+		final ToStringBuilder builder = new ToStringBuilder(this);
+		return builder.toString();
 	}
 
 }
